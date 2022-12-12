@@ -1,0 +1,4 @@
+2022-12-09 17:43:49.891189: W external/org_tensorflow/tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libcuda.so.1'; dlerror: libcuda.so.1: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /home/soft/cuda-11.0.2/lib64:/home/soft/cuda-11.0.2/lib64/stubs:/home/soft/cuda-11.0.2/nvvm/lib64:/home/soft/cuda-11.0.2/extras/CUPTI/lib64:/home/soft/cuda-11.0.2/extras/Debugger/lib64:/home/soft/centOS/lib/gnu/tcl/8.4.20/lib:/home/civil/btech/ce1180169/anaconda3/lib/
+2022-12-09 17:43:49.891725: W external/org_tensorflow/tensorflow/stream_executor/cuda/cuda_driver.cc:269] failed call to cuInit: UNKNOWN ERROR (303)
+WARNING:absl:No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
+=>> PBS: job killed: walltime 73842 exceeded limit 73800
