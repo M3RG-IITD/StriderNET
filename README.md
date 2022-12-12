@@ -1,4 +1,4 @@
-# HopNET: Sailing through the energy landscape
+# StriderNET: Striding through the energy landscape
 
 ->Graph neural network based policy gradient learning to get ultra stable glass structure.
 
