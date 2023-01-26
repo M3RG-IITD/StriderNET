@@ -1,0 +1,68 @@
+#Binary Glass from Melt-Quench method
+
+#------------------------Initialization----------------------------------------#
+units           lj
+dimension       3
+processors      * * *
+boundary        p p p
+variable	N equal 100
+variable	L equal (N/1.2)^(1/3)
+
+variable	cool_run equal 195000	#195000 steps corresponds to 3.33e-3 cooling_rate
+ 
+#--------------------------Read data-------------------------------------------#
+atom_style	atomic
+read_data      	AB100.dat
+
+#--------------------------Potential-------------------------------------------#
+pair_style	lj/cut 2.5
+pair_coeff	1 1 1.0 1.0 2.5		#e_AA=1.0 , sigma_AA=1.0, rc_AA=2.5*e_AA=2.5
+pair_coeff	1 2 1.5 0.8 2.0		#e_AB=1.5 , sigma_AB=0.8, rc_AB=2.5*e_AB=2.0
+pair_coeff	2 2 0.5 0.88 2.2	#e_AB=0.5 , sigma_BB=0.88, rc_BB=2.5*e_BB=2.2
+
+neighbor        2.0 bin
+neigh_modify    every 1 check yes
+timestep        0.003			#dt
+
+
+#---------------------------Outputs--------------------------------------------#
+thermo          1000
+thermo_style    custom step temp pe press lx ly lz density
+
+#----------------------------Mix-----------------------------------------------#
+
+
+velocity        all create 2.0 5812775 dist gaussian
+minimize	1.0e-10 1.0e-10 10000 100000
+
+fix             1 all nvt temp 2.0 2.0 0.3		
+run             100000
+unfix           1
+
+
+write_restart   liq2.rest
+write_data      liq2.dat
+
+#----------------------------Cooling-------------------------------------------#
+dump            2 all custom 100 Data\md.*.lammpstrj id type x y z
+fix             1 all nvt temp 2.0 0.05 0.3
+run             ${cool_run}
+unfix           1
+undump          2
+
+# relax
+fix             1 all nvt temp 0.05 0.05 0.3 
+run             100000
+unfix           1
+
+#------------------------Statistical average-----------------------------------#
+dump            2 all custom 100 md.lammpstrj id type x y z
+fix             1 all nvt temp 0.05 0.05 0.3
+run             10000
+unfix           1
+undump          2
+
+write_restart   glass.rest
+write_data      glass.dat
+
+

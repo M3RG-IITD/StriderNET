@@ -1,0 +1,20 @@
+#!/bin/sh
+#PBS -N monocsh1k
+#PBS -P krishnan.p2.65
+#PBS -m bea
+#PBS -M $USER@iitd.ac.in
+#PBS -l select=1:ncpus=4:mpiprocs=4:centos=haswell
+#PBS -l walltime=10:00:00
+export OMP_NUM_THREADS=1
+
+module load apps/lammps/11.08.2017/cpu
+
+# After job starts, must goto working directory.
+# $PBS_O_WORKDIR is the directory from where the job is fired.
+echo "==============================="
+echo $PBS_JOBID
+cat $PBS_NODEFILE
+echo "==============================="
+cd $PBS_O_WORKDIR
+#Command to execute LAAMPS on cpu nodes
+time -p mpirun -n 4 lmp_mpi -i in.gcmc

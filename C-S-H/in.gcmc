@@ -1,0 +1,63 @@
+# Example GCMC simulation by Paul Crozier
+# Initialization ------------------------------------------
+
+units		real
+atom_style     	full
+boundary        p p p
+lattice         fcc 1
+box		tilt large
+
+region         	box block 0 300 0 300 0 300 units box
+create_box      1 box
+
+mass		1 9.8551e+04
+
+# Potential - here it is table potential ------------------
+
+include		ana_pot0.mod
+
+group 		n1 type 1
+
+thermo		10
+compute_modify 	thermo_temp dynamic yes
+
+variable       	chempot equal  -2
+variable       	density equal atoms/vol
+variable       	specdensity equal v_density*1.39156E-25*1e27
+variable	denc1 equal count(n1)*1.39156E-25*1e27/vol
+variable       	chempotkcal equal ${chempot}/503.219
+variable	n1 equal count(n1)
+
+compute         peratom all stress/atom NULL
+compute         ns1 n1 reduce sum c_peratom[1] c_peratom[2] c_peratom[3]
+compute         ss1 n1 reduce sum c_peratom[4] c_peratom[5] c_peratom[6]
+
+variable     	totns1 equal -(c_ns1[1]+c_ns1[2]+c_ns1[3])/(3*vol)
+variable     	totss1 equal -(c_ss1[1]+c_ss1[2]+c_ss1[3])/(3*vol)
+
+variable 	ru equal 10^(4)
+
+fix           	2 n1 gcmc 1 1 1 1 294 300.0 ${chempotkcal} 25 grouptype 1 n1
+
+
+thermo_style   	custom step atoms pe vol density press v_chempot v_n1 v_totns1 v_totss1 
+dump		1 all custom 10 dump.gc.lammpstrj id type x y z
+dump_modify	1 append yes sort id
+run		${ru}
+
+undump		1
+
+
+
+write_data	mono.dat
+write_restart	mono.rest
+
+
+
+unfix		2
+
+
+
+#######################################
+# SIMULATION DONE
+print "All done"
