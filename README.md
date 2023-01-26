@@ -4,7 +4,7 @@
 
     State  : Glass configuration 
 
-    Action : Choosing i)a node to displace, ii)Amount of displacement(Continuous)
+    Action : Displacing the atoms(Continuous)
     
     Reward : DE
 
