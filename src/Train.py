@@ -38,14 +38,14 @@ from Optimizers import *
 key = random.PRNGKey(119)
 Sys=Generic_system()
 
-Train,Val,Test, shift_fn,Batch_pair_cutoffs,Batch_pair_sigma,Batch_Disp_Vec_fn,Batch_Node_energy_fn,Batch_Total_energy_fn,displacement_fn, shift_fn,Disp_Vec_fn =Sys.create_batched_States(random.PRNGKey(147),System='CSH',spatial_dimension=3,N=152, N_sample =100,Batch_size=3)    
+Train,Val,Test, shift_fn,Batch_pair_cutoffs,Batch_pair_sigma,Batch_Disp_Vec_fn,Batch_Node_energy_fn,Batch_Total_energy_fn,displacement_fn, shift_fn,Disp_Vec_fn =Sys.create_batched_States(random.PRNGKey(147),System='CSH',spatial_dimension=3,N=152, N_sample =100,Batch_size=4)    
 
 def Total_energy_fn(R):
     return Batch_Total_energy_fn(R[jnp.newaxis,:,:])[0]
 Total_energy_fn=jax.jit(Total_energy_fn)
 
-model=Pol_Net(edge_emb_size=32
-    ,node_emb_size=32
+model=Pol_Net(edge_emb_size=48
+    ,node_emb_size=48
     ,fa_layers=2
     ,fb_layers=2
     ,fv_layers=2
@@ -94,18 +94,10 @@ def loss_fn(params,Systate,key,spatial_dim=3,len_ep=10,Batch_id=1):
         (Batch_G, Batch_node_probs, Batch_Mux_Muy),mutated_vars = apply_fn(params, Systate_temp.Graph,mutable=['batch_stats'])
         Batch_Mux_Muy=jnp.clip(Batch_Mux_Muy,-5,5)  #Limit displacements
         #2: Choose node and disp from prob distributions
-        #Batch_chosen_node_indeces,Batch_chosen_node_prob=Batch_choose_topK_e_greedy(Batch_Mux_Muy,Batch_node_probs,key=key1,B_sz=B_sz,K=K_disp,epsilon=1.0)#eps= 1.0 during training
-        #To choose k nodes
-        
-        #Node_mask=jnp.zeros(Batch_Mux_Muy.reshape(B_sz,-1,spatial_dim).shape)
-        #Node_mask=Node_mask.at[jnp.array([[i for i in range(Batch_chosen_node_indeces.shape[0])]]* Batch_chosen_node_indeces.shape[1]).T, Batch_chosen_node_indeces,:].set(1.0)
         Batch_Disp_vec, Batch_log_disp_prob,Batch_prob_disp= Batch_pred_disp_vec(Batch_Mux_Muy.reshape(B_sz,-1,spatial_dim),key2,B_sz=B_sz,std=1e-6)
-        #Batch_log_node_prob=jnp.log(Batch_chosen_node_prob)
         
         Log_Pi_a_given_s=jnp.sum(Batch_log_disp_prob,axis=1)
         #3: Displace all nodes with predicted displacement
-    #    Batch_Disp_vec_pred=Batch_Mux_Muy.at[Batch_chosen_node_indeces].set(Batch_Disp_vec)
-    #    Node_indeces=jnp.array([[i for i in range(Systate.R.shape[1])] for k in range(B_sz)])
         Systate_new,Batch_d_PE=Sys.multi_disp_node(Batch_Disp_vec,Systate_temp,shift_fn,Batch_pair_cutoffs,Batch_pair_sigma,Batch_Disp_Vec_fn,Batch_Node_energy_fn,Batch_Total_energy_fn)
         log['d_PE']=log['d_PE'].at[:,i].set(Batch_d_PE)
         log['PE']=log['PE'].at[:,i].set(Systate_temp.pe)
