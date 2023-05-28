@@ -7,7 +7,7 @@ Graph neural network based policy gradient learning to get ultra stable glass st
     
     Reward : Reduction in energy ( -DE)
     
-   ![Logo](https://github.com/M3RG-IITD/StriderNET/blob/main/src/LJSystem_optimize_schematic.png)
+   ![Logo](./src/LJSystem_optimize_schematic.png)
 ## Authors
 	-Vaibhav Bihani, Deparment of Civil Engineering, Indian Institute of Technology Delhi, Hauz Khas, New Delhi, India 110016
 	-Sahil Manchanda,Department of Computer Science and Engineering,Indian Institute of Technology Delhi, Hauz Khas, New Delhi, India 110016
