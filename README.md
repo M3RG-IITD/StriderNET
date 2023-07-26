@@ -6,8 +6,8 @@ Click [here](https://proceedings.mlr.press/v202/bihani23a) to get the full paper
 
 Click [here](https://www.youtube.com/watch?v=wrQmLkqEegI) to watch a cool demo video.
 
+[![Video Thumbnail](https://img.youtube.com/vi/wrQmLkqEegI/default.jp)](https://www.youtube.com/watch?v=wrQmLkqEegI)
 
-[![Video Thumbnail](https://img.youtube.com/vi/wrQmLkqEegI/default.jpg)](https://www.youtube.com/watch?v=wrQmLkqEegI)
 
 
 
