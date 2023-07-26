@@ -3,11 +3,6 @@ Graph neural network-based policy gradient learning to get ultra-stable glass st
 
 
 [![](https://markdown-videos.vercel.app/youtube/wrQmLkqEegI)](https://youtu.be/wrQmLkqEegI)
-<div align="left">
-      <a href="https://www.youtube.com/watch?v=5yLzZikS15k">
-         <img src="https://img.youtube.com/vi/5yLzZikS15k/0.jpg" style="width:100%;">
-      </a>
-</div>
 
 
     State  : Glass configuration as graph 
