@@ -8,13 +8,8 @@ Click [here](https://www.youtube.com/watch?v=wrQmLkqEegI) to watch a cool demo v
 
 [![Video Thumbnail](https://img.youtube.com/vi/wrQmLkqEegI/maxresdefault.jpg)](https://www.youtube.com/watch?v=wrQmLkqEegI)
 
-
-
-    State  : Glass configuration as graph 
-
-    Action : Displacing the atoms(Continuous)
-    
-    Reward : Reduction in energy ( -DE)
+## Abstract
+Optimization of atomic structures presents a challenging problem, due to their highly rough and non-convex energy landscape, with wide applications in the fields of drug design, materials discovery, and mechanics. Here, we present a graph reinforcement learning approach, StriderNet, that learns a policy to displace the atoms towards low energy configurations. We evaluate the performance of StriderNet on three complex atomic systems, namely, binary Lennard-Jones particles, calcium silicate hydrates gel, and disordered silicon. We show that StriderNet outperforms all classical optimization algorithms and enables the discovery of a lower energy minimum. In addition, StriderNet exhibits a higher rate of reaching minima with energies, as confirmed by the average over multiple realizations. Finally, we show that StriderNet exhibits inductivity to unseen system sizes that are an order of magnitude different from the training system. All the codes and datasets are available at https://github.com/M3RG-IITD/StriderNET.
     
    ![Logo](./src/LJSystem_optimize_schematic.png)
 ## Authors
