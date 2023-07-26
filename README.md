@@ -9,6 +9,10 @@ Click [here](https://www.youtube.com/watch?v=wrQmLkqEegI) to watch a cool demo v
 [![Video Thumbnail](https://img.youtube.com/vi/wrQmLkqEegI/default.jp)](https://www.youtube.com/watch?v=wrQmLkqEegI)
 
 
+<a href="https://www.youtube.com/watch?v=/wrQmLkqEegI">
+  <img src="https://img.youtube.com/vi/wrQmLkqEegI/default.jpg" alt="Video Thumbnail" style="max-width: 100%;">
+</a>
+
 
 
     State  : Glass configuration as graph 
