@@ -1,6 +1,12 @@
 ## StriderNet: A Graph Reinforcement Learning Approach to Optimize Atomic Structures on Rough Energy Landscapes
 Graph neural network-based policy gradient learning to get ultra-stable glass structure.
-[![Watch the video](https://i.stack.imgur.com/Vp2cE.png)](https://youtu.be/wrQmLkqEegI)
+
+<a href="https://www.youtube.com/watch?v=wrQmLkqEegI" title="Music Caster Video Demo">
+  <p align="center">
+    <img width=75% src="https://img.youtube.com/vi/wrQmLkqEegImaxresdefault.jpg" alt="StriderNET Explainer Video"/>
+  </p>
+</a>
+
 
     State  : Glass configuration as graph 
 
